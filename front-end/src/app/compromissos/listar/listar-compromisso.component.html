@@ -1,0 +1,93 @@
+<div class="container" >
+  <div class="row">
+
+    <!-- Conteúdo principal -->
+    <div class="col-12 col-md-10 col-lg-9 mx-auto mt-5">
+
+      <!-- Titulo -->
+      <div class="text-md-start">
+        <h1 class="fw-bold text-primary">
+            Listar Compromissos
+          </h1>
+        <hr />
+      </div>
+
+      <!-- Barra de Ações -->
+      <div class="row d-flex justify-content-center  ">
+      <div class=" gap-1 mt-5 ">
+        <a [routerLink]="['/compromissos/inserir']"  role="button" class="btn btn-primary me-md-1">
+            <i class="pi pi-plus-circle me-2"></i>
+            Novo Compromisso
+        </a>
+        <br>
+      <button (click)="ListarPassados()"
+      type="button" class="btn btn-sm btn-primary me-0 me-md-1 mb-1 mb-md-auto mt-1">passados
+      <i class="bi btn-primary"></i>
+    </button>
+
+    <input
+    [(ngModel)]="dataHoje"
+    class="form-control"
+    type="date">
+
+
+      <button (click)="ListarFuturos()"
+      type="button" class="btn btn-sm btn-primary me-0 me-md-1 mb-1 mb-md-auto mt-1">entre
+      <i class="bi btn-primary"></i>
+    </button>
+
+
+    <input
+    [(ngModel)]="dataFutura"
+    class="form-control"
+    type="date">
+
+  </div>
+  </div>
+      <!-- Listagem de Registros -->
+      <div class="mt-3">
+        <table class="table table-light table-striped table-hover table-borderless">
+          <thead class="thead-dark text-center">
+          <tr>
+            <th>Data</th>
+            <th>Tipo do local</th>
+            <th>Hora de inicio</th>
+            <th>Hora de fim</th>
+            <th>Nome do contato</th>
+            <th>Assunto</th>
+            <th>Local</th>
+            <th>Link</th>
+            <th>Açoes</th>
+
+          </tr>
+          </thead>
+          <tbody class="text-center">
+            <tr *ngFor="let c of (compromissos$ | async)">
+              <td>{{c.data | date: 'dd/MM/yyyy' }}</td>
+              <td>{{c.tipoLocal }}</td>
+              <td>{{c.horaInicio }}</td>
+              <td>{{c.horaTermino }}</td>
+              <td title ="{{c.contato.nome }}">{{c.contato.telefone}</td>
+              <td>{{c.assunto }}</td>
+              <td>{{c.local? c.local : "-"}}</td>
+              <td>{{c.link ? c.link : "-"}}</td>
+
+              <td class="d-grid d-md-block">
+                <button [routerLink]="['/compromissos/editar', c.id]"
+                  type="button" class="btn btn-sm btn-primary me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button [routerLink]="['/compromissos/excluir', c.id]"
+                  type="button" class="btn btn-sm btn-outline-danger me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

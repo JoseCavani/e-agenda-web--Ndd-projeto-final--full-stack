@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <!-- Conteúdo principal -->
+    <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
+      <!-- Titulo -->
+      <div class="text-md-start">
+        <h1 class="fw-bold text-primary">
+            Inserir Nova Categoria
+          </h1>
+        <hr />
+      </div>
+
+      <form [formGroup]="formCategoria" class="mt-4">
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Titulo:</label>
+          <input
+            [ngClass]="titulo?.touched && titulo?.invalid ? 'is-invalid' : ''"
+            formControlName="titulo"
+            class="form-control"
+            type="text"
+            placeholder="Digite o assunto do compromisso"
+          />
+          <div class="invalid-tooltip" *ngIf="titulo?.touched && titulo?.invalid">
+            <span *ngIf="titulo?.errors?.['required']">O titulo precisa ser preenchido.</span>
+          </div>
+
+        <div class="card-footer g-grid d-flex gap-1 mt-5">
+          <button (click)="gravar()"
+            type="button" class="btn btn-primary px-5">
+            <i class="pi pi-save me-2"></i>
+            Gravar
+          </button>
+          <button routerLink="/compromissos/listar"
+            type="button" class="btn btn-outline-primary px-5">
+            <i class="pi pi-arrow-left me-2"></i>
+            Voltar
+          </button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
