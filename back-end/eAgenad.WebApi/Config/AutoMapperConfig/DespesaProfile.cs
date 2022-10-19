@@ -39,6 +39,7 @@ namespace eAgenad.WebApi.Config.AutoMapperConfig
     {
         public void Process(Despesa source, FormsDespesaViewModel destination, ResolutionContext context)
         {
+            destination.categoriasSelecionadas = new System.Collections.Generic.List<CategoriaSelecionadaViewModel>();
             if (source.Categorias.Count > 0)
             foreach (var categoria in source.Categorias)
             {
@@ -48,7 +49,7 @@ namespace eAgenad.WebApi.Config.AutoMapperConfig
                 categoriaSelecionada.Titulo = categoria.Titulo;
                 categoriaSelecionada.Selecionada = true;
 
-                    destination.categoriasSelecionadas = new System.Collections.Generic.List<CategoriaSelecionadaViewModel>();
+                    
 
                 destination.categoriasSelecionadas.Add(categoriaSelecionada);
             }

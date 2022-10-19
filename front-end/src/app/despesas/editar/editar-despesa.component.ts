@@ -102,7 +102,7 @@ this.categoriaBox;
       let categoria = new CategoriaSelecionadaViewModel();
       this.categoriaBox!.classList.remove('is-invalid')
 
-      if(this.despesaFormVM.categoriasSelecionadas.find(x => x.id === this.categoriaAtual.id) != undefined){
+      if(this.despesaFormVM.categoriasSelecionadas.find(x => x.id === this.categoriaAtual.id) != undefined && this.despesaFormVM.categoriasSelecionadas.find(x => x.id === this.categoriaAtual.id)?.selecionada === true){
         this.categoriaBox!.classList.add('is-invalid')
       return;
       }
@@ -120,7 +120,7 @@ this.categoriaBox;
   public removerCategoria(categoria: CategoriaSelecionadaViewModel): void {
     this.despesaFormVM.categoriasSelecionadas.forEach((x, index) => {
       if (x === categoria)
-        this.despesaFormVM.categoriasSelecionadas.splice(index, 1);
+        x.selecionada = false
     })
   }
 

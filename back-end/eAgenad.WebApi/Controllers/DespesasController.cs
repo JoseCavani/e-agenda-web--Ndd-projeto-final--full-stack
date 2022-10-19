@@ -60,6 +60,8 @@ namespace eAgenad.WebApi.Controllers
             if (despesaResult.IsFailed)
                 return InternalError(despesaResult);
 
+            var a = mapeadorDespesas.Map<FormsDespesaViewModel>(despesaResult.Value);
+
             return Ok(new
             {
                 sucesso = true,
@@ -69,7 +71,7 @@ namespace eAgenad.WebApi.Controllers
 
 
         [HttpGet("visualizacao-completa/{id:guid}")]
-        public ActionResult<FormsDespesaViewModel> SelecionarDespesaPorId(Guid id)
+        public ActionResult<VisualizarDespesaViewModel> SelecionarDespesaPorId(Guid id)
         {
             var despesaResult = servicoDespesa.SelecionarPorId(id);
 
@@ -114,6 +116,7 @@ namespace eAgenad.WebApi.Controllers
         {
 
             var despesaResult = servicoDespesa.SelecionarPorId(id);
+          
 
 
             if (despesaResult.IsFailed && RegistroNaoEncontrado(despesaResult))

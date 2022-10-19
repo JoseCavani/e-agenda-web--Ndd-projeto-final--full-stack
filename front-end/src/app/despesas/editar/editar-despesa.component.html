@@ -94,18 +94,16 @@
                 <th>Ações</th>
               </tr>
               </thead>
-              <tbody class="text-center">
-                <tr *ngFor="let categoria of despesaFormVM.categoriasSelecionadas">
+              <tbody class="text-center" *ngFor="let categoria of despesaFormVM.categoriasSelecionadas">
+                <tr *ngIf="categoria.selecionada === true">
                   <td>{{categoria.titulo}}</td>
 
                   <td class="d-grid d-md-block">
-                    <button type="button" class="btn btn-sm btn-outline-danger me-0 me-md-1 mb-1 mb-md-auto" (click)="removerCategoria(categoria)">
+                    <button *ngIf="categoria.selecionada === true" type="button" class="btn btn-sm btn-outline-danger me-0 me-md-1 mb-1 mb-md-auto" (click)="removerCategoria(categoria)">
                       <i class="bi bi-trash"></i>
                     </button>
                   </td>
-
                 </tr>
-
               </tbody>
             </table>
           </div>
