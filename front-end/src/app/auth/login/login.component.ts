@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     titulo.setTitle('Login - e-Agenda');
   }
@@ -46,7 +48,10 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.toastr.warning('formulario nao prenchido corretamente','Aviso');
+      return;
+    }
 
     this.loginVM = Object.assign({}, this.loginVM, this.form.value);
 
@@ -66,6 +71,6 @@ export class LoginComponent implements OnInit {
   }
 
   private processarErro(erro: any) {
-    console.log(erro);
+    this.toastr.error(erro,'Erro')
   }
 }

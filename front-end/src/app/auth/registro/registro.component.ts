@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -25,7 +26,8 @@ export class RegistroComponent implements OnInit {
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     titulo.setTitle('Registro - e-Agenda');
   }
@@ -56,7 +58,10 @@ export class RegistroComponent implements OnInit {
   }
 
   public registrar() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.toastr.warning('formulario nao prenchido corretamente','Aviso');
+      return;
+    }
 
     this.registroVM = Object.assign({}, this.registroVM, this.form.value);
 
@@ -74,6 +79,7 @@ export class RegistroComponent implements OnInit {
   }
 
   private processarFalha(erro: any) {
+    this.toastr.error(erro, 'Erro')
     console.log(erro);
   }
 }
